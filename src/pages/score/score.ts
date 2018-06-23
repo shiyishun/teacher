@@ -49,6 +49,9 @@ export class ScorePage {
           duration:3000
         });
         toast.present();
+         this.due=true;
+         this.switchType();
+
       }else {
       let errmsg = result.errmsg;
       let toast = this.toastCtrl.create({
@@ -59,8 +62,7 @@ export class ScorePage {
         closeButtonText: 'ClOSE'
       });
       toast.present();
-      this.due=true;
-      this.switchType();
+
     }
   },
   err => {

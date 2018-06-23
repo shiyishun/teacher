@@ -24,11 +24,7 @@ export class CallRollPage {
   }
 
   find() {
-    this.CallData.updateCallTheRoll(0,1,"电子技术","2017-6-29","3*4","160327101").subscribe(
-      result => {
-        console.log(result);
-      }
-    )
+
   }
 }
 
