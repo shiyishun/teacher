@@ -377,9 +377,11 @@ look(j, i){
       this. CallData.setSigninState(callTherollId, callState).subscribe(
         result => {
 
-          if (result.code == '0') {
-
+          if (result.code == '0'){
             this.getCallThreollList();
+            this.isShowPosition = false;
+            this.isShowPositonGrid = true;
+            this.position[j-1][i-1][1]=0;
 
           } else {
             let errmsg = result.errmsg;

@@ -11,10 +11,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class RedditData {
   // const
-  hurl = ' http://localhost:8080';
+  //hurl = ' http://localhost:8080';
 
 //hurl = 'http://pandagp.cn:8888';
- //hurl = 'http://119.29.60.141:8888';
+ hurl = 'http://119.29.60.141:8888';
 
 
   constructor(public http: Http) {

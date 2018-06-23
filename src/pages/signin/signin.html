@@ -17,24 +17,6 @@
   <!--</ion-fab>-->
 
 
-  <ion-grid *ngIf="judge1">
-    <ion-row *ngFor="let j of this.hangT">
-      <ion-col *ngFor="let i of this.lieT">
-      <button (click)="question(j+1,i+1)">
-        <ion-icon name="person" *ngIf="position[j][i][1]==1" style="font-size: small"><br/>{{position[j][i][0]}}</ion-icon>
-      <ion-icon name="ios-person-outline" *ngIf="position[j][i][1]==0"><br/></ion-icon>
-      </button>
-      <div *ngIf="position[j][i][1]==1" style="background-color: #2ec95c">{{position[j][i][0]}}</div>
-      <div *ngIf="position[j][i][1]!=1" style="background-color: #00c21c"> </div>
-    <!--</ion-icon>-->
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-  <button ion-button (click)="find()" *ngIf="judge1"full>课堂提问</button>
-  <button ion-button (click)="start()" *ngIf="judge1" full>开始签到</button>
-    <button ion-button (click)="test()" *ngIf="judge1" full>历史日期测试</button>
-
   <!--<ion-grid no-lines="">-->
   <div *ngIf="due" class="show3">
 
