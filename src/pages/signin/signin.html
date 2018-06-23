@@ -76,9 +76,11 @@
     <ion-grid *ngIf="isShowPositonGrid">
       <ion-row *ngFor="let j of this.hangT">
         <ion-col *ngFor="let i of this.lieT">
-          <button (click)="look(j+1,i+1)">
-            <ion-icon name="person" *ngIf="position[j][i][1]==1" style="font-size: small"><br/>{{position[j][i][0]}}</ion-icon>
-            <ion-icon name="ios-person-outline" *ngIf="position[j][i][1]==0"><br/></ion-icon>
+          <button *ngIf="position[j][i][1]==1" (click)="look(j+1,i+1)">
+            <ion-icon name="person"  style="font-size: small"><br/>{{position[j][i][0]}}</ion-icon>
+          </button>
+          <button *ngIf="position[j][i][1]==0">
+            <ion-icon name="ios-person-outline" ><br/></ion-icon>
           </button>
           <!--</ion-icon>-->
         </ion-col>

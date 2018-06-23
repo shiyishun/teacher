@@ -275,9 +275,10 @@ export class SigninPage {
     var temp = [];
     var name = [];
     var no = [];
-    var markId = [];
+    var callTherollId = [];
     var major =[];
     var classNo =[];
+    var callState = [];
     this.classShape = classShape;
     this.hang = parseInt(this.classShape.split("*")[0]);
     this.lie = parseInt(this.classShape.split("*")[1]);
@@ -289,9 +290,10 @@ export class SigninPage {
           temp.push(this.callTherollList[i].callPosition);
           name.push(this.callTherollList[i].name);
           no.push(this.callTherollList[i].no);
-          markId.push(this.callTherollList[i].markId);
+          callTherollId.push(this.callTherollList[i].callTherollId);
           major.push(this.callTherollList[i].major);
           classNo.push(this.callTherollList[i].classNoStr);
+          callState.push(this.callTherollList[i].callState);
         }
     }
 
@@ -328,6 +330,7 @@ export class SigninPage {
         hhh[i][j][3] = '';
         hhh[i][j][4] = '';
         hhh[i][j][5]= '';
+        hhh[i][j][6]= '';
       }
     }
 
@@ -335,10 +338,10 @@ export class SigninPage {
       hhh[this.call1[i] - 1][this.call2[i] - 1][0] = name[i];
       hhh[this.call1[i] - 1][this.call2[i] - 1][1] = 1;
       hhh[this.call1[i] - 1][this.call2[i] - 1][2] = no[i];
-      hhh[this.call1[i] - 1][this.call2[i] - 1][3] = markId[i];
+      hhh[this.call1[i] - 1][this.call2[i] - 1][3] = callTherollId[i];
       hhh[this.call1[i] - 1][this.call2[i] - 1][4] = major[i];
       hhh[this.call1[i] - 1][this.call2[i] - 1][5] = classNo[i];
-
+      hhh[this.call1[i] - 1][this.call2[i] - 1][6] = callState[i];
     }
     this.position = hhh;
 
@@ -347,26 +350,60 @@ export class SigninPage {
 look(j, i){
 
   let alert = this.alerCtrl.create();
+
   alert.setTitle('个人信息');
+  alert.setMessage("<div>学号："+this.position[j-1][i-1][2]+"</div>" +
+    "<div>姓名："+this.position[j-1][i-1][0] +"</div>"+
+    "<div>专业："+this.position[j-1][i-1][4]+"</div>"+
+    "<div>班级："+this.position[j-1][i-1][5]+"</div>");
+
 
   alert.addInput({
-    type:'text',
-    value: '学号：'+this.position[j-1][i-1][2]
-  });
+      type: 'radio',
+      label: '旷课',
+      value: '0'});
   alert.addInput({
-    type:'text',
-    value: '姓名：'+this.position[j-1][i-1][0]
-  });
-  alert.addInput({
-    type:'text',
-    value: '专业：'+this.position[j-1][i-1][4]
-  });
+    type: 'radio',
+    label: '请假',
+    value: '2' });
 
-  alert.addInput({
-    type:'text',
-    value: '班级：'+this.position[j-1][i-1][5]
-  });
   alert.addButton('关闭');
+  alert.addButton({
+    text: '确定',
+    handler: data => {
+      let callTherollId = this.position[j-1][i-1][3];
+      console.log('Radio data:', data);
+      let callState =  data;
+      this. CallData.setSigninState(callTherollId, callState).subscribe(
+        result => {
+
+          if (result.code == '0') {
+
+            this.getCallThreollList();
+
+          } else {
+            let errmsg = result.errmsg;
+            let toast = this.toastCtrl.create({
+              message: errmsg,
+              duration: 2000,
+              position: 'middle',
+              showCloseButton: true,
+              closeButtonText: 'ClOSE'
+            });
+            toast.present();
+          }
+        },
+        err => {
+          console.error("Error : " + err);
+        },
+        () => {
+          console.log('courseListSelect completed');
+        }
+      );
+
+
+    }
+  });
   alert.present();
 
 }

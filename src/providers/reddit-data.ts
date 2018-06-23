@@ -11,11 +11,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class RedditData {
   // const
- //hurl = ' http://localhost:8080';
+  hurl = ' http://localhost:8080';
 
-// hurl = 'http://pandagp.cn:8888';
-  hurl = 'http://119.29.60.141:8888';
- 
+//hurl = 'http://pandagp.cn:8888';
+ //hurl = 'http://119.29.60.141:8888';
+
 
   constructor(public http: Http) {
     console.log('Hello SignInData Provider');
@@ -54,6 +54,11 @@ export class RedditData {
 
   editMark(markId, dailyScore, finalScore) {
     let url = this.hurl + '/xsdk/app/teacher/edit_mark?markId=' + markId + "&dailyScore=" + dailyScore + "&finalScore=" + finalScore;
+    return this.http.get(url).map(res => res.json());
+  }
+
+  setSigninState(callTherollId, callState) {
+    let url = this.hurl + '/xsdk/app/teacher/set_signin_state?callTherollId=' + callTherollId + "&callState=" + callState;
     return this.http.get(url).map(res => res.json());
   }
 
