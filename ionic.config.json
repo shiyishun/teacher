@@ -1,7 +1,8 @@
 {
-  "name": "StudentSigin",
+  "name": "StudentSignIn",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
-
